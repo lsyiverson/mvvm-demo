@@ -1,9 +1,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data class="com.lsyiverson.demo.databinding.MainBinding">
-        <import type="com.lsyiverson.demo.rest.model.juhe.MobileResponse" />
-        <variable name="mobileResponse" type="MobileResponse" />
+    <data class=".databinding.MainBinding">
+        <variable name="mainVM" type="com.lsyiverson.demo.ui.viewmodel.MainViewModel" />
     </data>
 
     <LinearLayout
@@ -18,34 +18,35 @@
 
         <EditText
             android:id="@+id/mobile_number"
+            android:text="@{mainVM.mobileNumber}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/query"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{mainVM.onQuery}"
             android:text="@string/query" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{mobileResponse.result.province}" />
+            android:text="@{mainVM.result.province}" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{mobileResponse.result.city}"/>
+            android:text="@{mainVM.result.city}"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{mobileResponse.result.company}"/>
+            android:text="@{mainVM.result.company}"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{mobileResponse.result.card}"/>
+            android:text="@{mainVM.result.card}"/>
 
     </LinearLayout>
 </layout>

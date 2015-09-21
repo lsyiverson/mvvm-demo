@@ -3,18 +3,15 @@ package com.lsyiverson.demo.ui;
 import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.view.View;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 
 import com.lsyiverson.demo.R;
 import com.lsyiverson.demo.databinding.MainBinding;
-import com.lsyiverson.demo.rest.RestClient;
-import com.lsyiverson.demo.rest.service.JuheService;
-
-import rx.android.schedulers.AndroidSchedulers;
+import com.lsyiverson.demo.ui.viewmodel.MainViewModel;
 
 public class MainActivity extends Activity {
-
-    private JuheService juheService;
 
     private MainBinding mainBinding;
 
@@ -22,15 +19,25 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mainBinding.setMainVM(new MainViewModel());
 
-        juheService = RestClient.getJuheService();
-        mainBinding.query.setOnClickListener(this::query);
-    }
+        mainBinding.mobileNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-    private void query(View view) {
+            }
 
-        juheService.getMobileAttribute(mainBinding.mobileNumber.getText().toString(), "3cbf0d058323365bc0ddd1f2cb01a770")
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mainBinding::setMobileResponse);
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.equals(mainBinding.getMainVM().getMobileNumber(), s.toString())) {
+                    mainBinding.getMainVM().setMobileNumber(s.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mainBinding.mobileNumber.setSelection(s.length());
+            }
+        });
     }
 }

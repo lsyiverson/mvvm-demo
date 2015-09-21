@@ -44,14 +44,4 @@ public class MobileResponse {
     public void setErrorCode(Integer errorCode) {
         this.errorCode = errorCode;
     }
-
-    @Override
-    public String toString() {
-        return "MobileResponse{" +
-                "resultCode='" + resultCode + '\'' +
-                ", reason='" + reason + '\'' +
-                ", result=" + result +
-                ", errorCode='" + errorCode + '\'' +
-                '}';
-    }
 }

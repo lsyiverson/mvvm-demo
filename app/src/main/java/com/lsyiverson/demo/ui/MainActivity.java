@@ -28,10 +28,9 @@ public class MainActivity extends Activity {
     }
 
     private void query(View view) {
-        mainBinding.mobileResult.setText("");
 
         juheService.getMobileAttribute(mainBinding.mobileNumber.getText().toString(), "3cbf0d058323365bc0ddd1f2cb01a770")
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(response -> mainBinding.setMobileResult(response.toString()));
+                .subscribe(mainBinding::setMobileResponse);
     }
 }

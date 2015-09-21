@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data class="com.lsyiverson.demo.databinding.MainBinding">
-        <variable name="mobileResult" type="String" />
+        <import type="com.lsyiverson.demo.rest.model.juhe.MobileResponse" />
+        <variable name="mobileResponse" type="MobileResponse" />
     </data>
 
     <LinearLayout
@@ -27,10 +28,24 @@
             android:text="@string/query" />
 
         <TextView
-            android:id="@+id/mobile_result"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{mobileResult}" />
+            android:text="@{mobileResponse.result.province}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{mobileResponse.result.city}"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{mobileResponse.result.company}"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{mobileResponse.result.card}"/>
 
     </LinearLayout>
 </layout>

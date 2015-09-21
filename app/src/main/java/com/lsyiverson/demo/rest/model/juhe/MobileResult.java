@@ -1,9 +1,13 @@
 package com.lsyiverson.demo.rest.model.juhe;
 
+import com.google.gson.annotations.SerializedName;
+
 public class MobileResult {
     private String province;
     private String city;
-    private String areacode;
+
+    @SerializedName("areacode")
+    private String areaCode;
     private String zip;
     private String company;
     private String card;
@@ -24,12 +28,12 @@ public class MobileResult {
         this.city = city;
     }
 
-    public String getAreacode() {
-        return areacode;
+    public String getAreaCode() {
+        return areaCode;
     }
 
-    public void setAreacode(String areacode) {
-        this.areacode = areacode;
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
     }
 
     public String getZip() {
@@ -54,17 +58,5 @@ public class MobileResult {
 
     public void setCard(String card) {
         this.card = card;
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "province='" + province + '\'' +
-                ", city='" + city + '\'' +
-                ", areacode='" + areacode + '\'' +
-                ", zip='" + zip + '\'' +
-                ", company='" + company + '\'' +
-                ", card='" + card + '\'' +
-                '}';
     }
 }

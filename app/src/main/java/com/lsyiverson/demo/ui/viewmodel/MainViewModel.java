@@ -2,6 +2,10 @@ package com.lsyiverson.demo.ui.viewmodel;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.text.Editable;
+import android.text.Selection;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 
 import com.lsyiverson.demo.BR;
@@ -18,7 +22,7 @@ public class MainViewModel extends BaseObservable {
     private JuheService juheService;
 
     public MainViewModel() {
-        juheService = RestClient.getJuheService();
+        this.juheService = RestClient.getJuheService();
     }
 
     @Bindable
@@ -46,4 +50,22 @@ public class MainViewModel extends BaseObservable {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> setResult(response.getResult()));
     }
+
+    public TextWatcher watcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (!TextUtils.equals(getMobileNumber(), s.toString())) {
+                setMobileNumber(s.toString());
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            Selection.setSelection(s, s.length());
+        }
+    };
 }

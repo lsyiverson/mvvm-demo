@@ -19,6 +19,7 @@
         <EditText
             android:id="@+id/mobile_number"
             android:text="@{mainVM.mobileNumber}"
+            android:addTextChangedListener="@{mainVM.watcher}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

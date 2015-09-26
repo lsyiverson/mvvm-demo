@@ -2,11 +2,6 @@ package com.lsyiverson.demo.ui.viewmodel;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.text.Editable;
-import android.text.Selection;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.view.View;
 
 import com.lsyiverson.demo.BR;
 import com.lsyiverson.demo.rest.RestClient;
@@ -45,27 +40,9 @@ public class MainViewModel extends BaseObservable {
         notifyPropertyChanged(BR.mobileNumber);
     }
 
-    public void onQuery(View view) {
+    public void query() {
         juheService.getMobileAttribute(mobileNumber, "3cbf0d058323365bc0ddd1f2cb01a770")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> setResult(response.getResult()));
     }
-
-    public TextWatcher watcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (!TextUtils.equals(getMobileNumber(), s.toString())) {
-                setMobileNumber(s.toString());
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            Selection.setSelection(s, s.length());
-        }
-    };
 }
